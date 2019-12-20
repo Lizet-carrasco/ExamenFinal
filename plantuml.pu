@@ -1,0 +1,56 @@
+@startuml
+class models.Dpavilion{
+	code:Integer
+	name:String
+}
+
+class models.Eclassroom{
+	code:Integer
+}
+
+class models.Fcabin{
+	code:Integer
+	location:String
+	codePavilion:Integer
+	codeClassroom:Integer
+}
+
+class models.Auser{
+	dni:Integer
+	name:String
+	lastName:String
+	age:Integer
+}
+
+class models.Celector{
+	code:Integer
+	dniUser:Integer
+	state:boolean
+	mail:String
+}
+
+class models.Bcandidate{
+	code:Integer	
+	dniUser:Integer
+}
+
+class models.Gvote{
+	code:Integer
+	codeCandidate:Integer
+	codeCabin:Integer
+	date:date
+}
+
+models.Auser <|-- models.Celector
+models.Auser <|-- models.Bcandidate
+models.Celector "1" *-- "1" models.Gvote
+models.Gvote "*" *-- "1" models.Fcabin
+models.Gvote "*" *-- "1" models.Bcandidate
+models.Eclassroom "1" -- "1" models.Fcabin
+models.Eclassroom "*" --> "1" models.Dpavilion
+
+class controller userController{
+	vote()
+}
+
+@enduml
